@@ -141,6 +141,10 @@ class AdvancedXScraper:
         try:
             print(f"📱 {max_tweets} tweet toplanıyor...")
 
+            # Global sayaçları sıfırla
+            self._empty_scroll_count = 0
+            self._total_old_tweets = 0
+
             # URL belirleme
             url = self._get_scraping_url(source_type, profile_username, hashtag)
             print(f"🔗 Gidilen URL: {url}")
@@ -150,7 +154,7 @@ class AdvancedXScraper:
 
             tweets = []
             scroll_count = 0
-            max_scrolls = 20
+            max_scrolls = 15  # 20'den 15'e düşürdük
             cutoff_date = None
 
             if days_filter > 0:
