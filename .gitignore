@@ -1,0 +1,165 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# PyCharm
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# Selenium
+*.log
+selenium-debug.log
+debug.log
+
+# Chrome/Chromium
+chrome_debug.log
+chromedriver.log
+
+# Output Files
+*.csv
+x_tweets_*.csv
+x_tweets_advanced_*.csv
+tweets_*.csv
+
+# Archive folders
+archive/
+outputs/
+data/
+results/
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Cache
+.cache/
+*.cache
+.pytest_cache/
+
+# Logs
+*.log
+logs/
+
+# Screenshots
+*.png
+*.jpg
+*.jpeg
+screenshots/
+
+# Credentials (NEVER commit these)
+credentials.json
+config.json
+secrets.json
+.env
+.env.local
+.env.production
+
+# ChromeDriver
+chromedriver
+chromedriver.exe
+geckodriver
+geckodriver.exe
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Test files
+test_*.py
+*_test.py
+tests/
+.coverage
+htmlcov/
+
+# Documentation build
+docs/_build/
+site/
+
+# MacOS
+.AppleDouble
+.LSOverride
+
+# Windows
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
