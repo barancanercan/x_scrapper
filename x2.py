@@ -595,13 +595,14 @@ class AdvancedXScraper:
 💾 CSV kaydetmeye hazır!"""
 
     def save_csv(self):
-        """CSV'ye kaydet - Geliştirildi"""
+        """CSV'ye kaydet - Gradio indirme desteği"""
         if not self.tweets_data:
-            return "❌ Kaydedilecek veri yok"
+            return "❌ Kaydedilecek veri yok", None
 
         try:
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            csv_file = Path(f"x_tweets_advanced_{timestamp}.csv")
+            csv_filename = f"x_tweets_advanced_{timestamp}.csv"
+            csv_file = Path(csv_filename)
 
             fieldnames = [
                 'zaman_toplama', 'tweet_tarihi', 'tweet', 'yazar', 'yazar_handle',
@@ -613,10 +614,12 @@ class AdvancedXScraper:
                 writer.writeheader()
                 writer.writerows(self.tweets_data)
 
-            return f"✅ Gelişmiş CSV kaydedildi: {csv_file}\n📊 {len(self.tweets_data)} tweet, 10 kolon veri"
+            message = f"✅ Gelişmiş CSV hazırlandı: {csv_filename}\n📊 {len(self.tweets_data)} tweet, 10 kolon veri\n💾 Aşağıdaki butondan indirebilirsiniz!"
+
+            return message, str(csv_file)
 
         except Exception as e:
-            return f"❌ CSV kaydetme hatası: {e}"
+            return f"❌ CSV kaydetme hatası: {e}", None
 
     def close(self):
         """Driver'ı kapat"""
@@ -658,7 +661,8 @@ def scrape_tweets_handler(tweet_count, source_type, profile_username, hashtag, d
 
 
 def save_data():
-    return scraper.save_csv()
+    message, file_path = scraper.save_csv()
+    return message, file_path
 
 
 def close_browser():
@@ -732,8 +736,15 @@ with gr.Blocks(title="🚀 X Scraper - Gelişmiş Versiyon", theme=gr.themes.Sof
 
             gr.Markdown("### 💾 4. Kaydet & Kapat")
             with gr.Row():
-                save_btn = gr.Button("💾 CSV Kaydet", variant="secondary")
+                save_btn = gr.Button("💾 CSV Hazırla", variant="secondary")
                 close_btn = gr.Button("❌ Kapat", variant="secondary")
+
+            # CSV İndirme Bölümü - YENİ
+            download_file = gr.File(
+                label="📥 CSV İndirme",
+                visible=False,
+                interactive=False
+            )
 
         with gr.Column(scale=2):
             scrape_output = gr.Textbox(
@@ -763,7 +774,25 @@ with gr.Blocks(title="🚀 X Scraper - Gelişmiş Versiyon", theme=gr.themes.Sof
         inputs=[tweet_count, source_type, profile_username, hashtag, days_filter],
         outputs=[scrape_output, tweet_table, stats]
     )
-    save_btn.click(save_data, outputs=[scrape_output])
+
+
+    # CSV kaydetme ve indirme - Güncellenmiş
+    def handle_save_and_download(file_obj, message):
+        if file_obj:
+            return message, gr.File(value=file_obj, visible=True)
+        else:
+            return message, gr.File(visible=False)
+
+
+    save_btn.click(
+        save_data,
+        outputs=[scrape_output, download_file]
+    ).then(
+        lambda file_path: gr.File(value=file_path, visible=True) if file_path else gr.File(visible=False),
+        inputs=[download_file],
+        outputs=[download_file]
+    )
+
     close_btn.click(close_browser, outputs=[scrape_output])
 
     # Kullanım örnekleri
