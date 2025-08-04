@@ -1,0 +1,6 @@
+# System packages for Streamlit Cloud deployment
+# Required for Chrome/Chromium and Selenium
+
+chromium-browser
+chromium-chromedriver
+xvfb

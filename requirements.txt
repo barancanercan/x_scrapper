@@ -1,5 +1,12 @@
-# X Scraper Requirements
-# Core dependencies for advanced Twitter/X scraping
+# X Scraper - Streamlit Requirements
+# Core dependencies for Streamlit deployment
+
+# Streamlit framework
+streamlit>=1.28.0
+
+# Data processing
+pandas>=2.0.0
+openpyxl>=3.1.0
 
 # Selenium - Web automation and scraping
 selenium>=4.15.0
@@ -7,14 +14,11 @@ selenium>=4.15.0
 # WebDriver Manager - Automatic ChromeDriver management
 webdriver-manager>=4.0.1
 
-# Gradio - Web interface and CSV download
-gradio>=4.0.0
-
-# Additional recommended packages for stability
+# Additional stability packages
 requests>=2.31.0
 urllib3>=2.0.0
 certifi>=2023.7.22
 
-# Optional: Enhanced data processing
-# pandas>=2.0.0  # Uncomment for advanced data analysis
-# numpy>=1.24.0  # Uncomment for numerical operations
+# Optional: Enhanced data visualization
+plotly>=5.17.0
+altair>=5.1.0
