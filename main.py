@@ -33,10 +33,11 @@ class AdvancedXScraper:
         self.tweets_data = []
 
     def setup_driver(self):
-        """Chrome driver kurulum - Streamlit için optimize edilmiş"""
+        """Chrome driver kurulum - Streamlit Cloud için optimize edilmiş"""
         try:
             options = Options()
-            # Streamlit deployment için headless mode
+
+            # Streamlit Cloud için gerekli options
             options.add_argument("--headless")
             options.add_argument("--no-sandbox")
             options.add_argument("--disable-dev-shm-usage")
@@ -45,17 +46,56 @@ class AdvancedXScraper:
             options.add_argument("--disable-plugins")
             options.add_argument("--disable-gpu")
             options.add_argument("--window-size=1920,1080")
+            options.add_argument("--disable-web-security")
+            options.add_argument("--disable-features=VizDisplayCompositor")
+            options.add_argument("--remote-debugging-port=9222")
+            options.add_argument(
+                "--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+
             options.add_experimental_option("excludeSwitches", ["enable-automation"])
             options.add_experimental_option('useAutomationExtension', False)
+            options.add_experimental_option("detach", True)
 
-            service = Service(ChromeDriverManager().install())
+            # Streamlit Cloud için ChromeDriver path detection
+            import shutil
+            import os
+
+            # ChromeDriver'ı farklı yollardan bul
+            chrome_driver_paths = [
+                "/usr/bin/chromedriver",
+                "/usr/local/bin/chromedriver",
+                "/opt/chrome/chromedriver",
+                shutil.which("chromedriver")
+            ]
+
+            chrome_driver_path = None
+            for path in chrome_driver_paths:
+                if path and os.path.exists(path):
+                    chrome_driver_path = path
+                    break
+
+            if chrome_driver_path:
+                # Manuel service path
+                service = Service(chrome_driver_path)
+                st.info(f"✅ ChromeDriver bulundu: {chrome_driver_path}")
+            else:
+                # WebDriverManager fallback
+                try:
+                    service = Service(ChromeDriverManager().install())
+                    st.info("✅ ChromeDriver WebDriverManager ile yüklendi")
+                except:
+                    return False, "❌ ChromeDriver kurulamadı. Lütfen sistem yöneticisiyle iletişime geçin."
+
             self.driver = webdriver.Chrome(service=service, options=options)
             self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
-            return True, "✅ Chrome driver başarıyla kuruldu!"
+            # Test connection
+            self.driver.get("https://httpbin.org/user-agent")
+
+            return True, "✅ Chrome driver başarıyla kuruldu ve test edildi!"
 
         except Exception as e:
-            return False, f"❌ Driver hatası: {e}"
+            return False, f"❌ Driver hatası: {e}\n💡 Çözüm: Streamlit uygulamasını yeniden başlatın"
 
     def login_x(self, username, password):
         """X'e giriş yap"""

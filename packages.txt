@@ -1,6 +1,5 @@
 # System packages for Streamlit Cloud deployment
-# Required for Chrome/Chromium and Selenium
+# Required for Chrome/Chromium and Selenium - Debian 11 compatible
 
-chromium-browser
-chromium-chromedriver
-xvfb
+chromium
+chromium-driver
