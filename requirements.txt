@@ -1,17 +1,19 @@
-# X Scraper - Streamlit Cloud Requirements
-# Optimized for Streamlit Cloud deployment
+# X Scraper - Excel Destekli Requirements
+# Bu proje Gradio kullanır, Streamlit değil
 
-# Streamlit framework
-streamlit>=1.28.0
+# Web Interface - Gradio
+gradio>=4.0.0
 
 # Data processing
 pandas>=2.0.0
+
+# Excel support
 openpyxl>=3.1.0
 
 # Selenium - Web automation and scraping
 selenium>=4.15.0
 
-# WebDriver Manager - Automatic ChromeDriver management (fallback)
+# WebDriver Manager - Automatic ChromeDriver management
 webdriver-manager>=4.0.1
 
 # HTTP requests and stability
@@ -22,7 +24,3 @@ certifi>=2023.7.22
 # Additional system compatibility
 wheel>=0.41.0
 setuptools>=68.0.0
-
-# Optional: Enhanced data visualization (uncomment if needed)
-# plotly>=5.17.0
-# altair>=5.1.0
