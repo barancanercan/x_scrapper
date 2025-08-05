@@ -1,4 +1,4 @@
-# 🚀 X (Twitter) Scraper - Excel Destekli Professional Tweet Collection Tool
+# 🚀 X (_Twitter_) Scraper - Professional Tweet Collection Tool
 
 <div align="center">
 
