@@ -747,10 +747,6 @@ def login(username, password):
     return scraper.login_x(clean_username, password)
 
 
-def load_excel_handler(excel_file):
-    return scraper.load_excel_data(excel_file)
-
-
 def scrape_tweets_handler(tweet_count, source_type, profile_username, hashtag, days_filter):
     return scraper.scrape_tweets(
         max_tweets=int(tweet_count),
@@ -786,15 +782,7 @@ with gr.Blocks(title="🚀 X Scraper - Excel Destekli Versiyon", theme=gr.themes
             setup_btn = gr.Button("🚀 Tarayıcı Hazırla", variant="primary", size="lg")
             setup_output = gr.Textbox(label="Kurulum Durumu", lines=3)
 
-            gr.Markdown("### 📊 2. Excel Veri Yükleme (Opsiyonel)")
-            excel_upload = gr.File(
-                label="📁 Excel Dosyası Yükle",
-                file_types=[".xlsx", ".xls"],
-                type="filepath"
-            )
-            load_excel_btn = gr.Button("📊 Excel Verilerini Yükle", variant="secondary", size="lg")
-
-            gr.Markdown("### 🔐 3. X Giriş")
+            gr.Markdown("### 🔐 2. X Giriş")
             username = gr.Textbox(
                 label="👤 X Kullanıcı Adı",
                 placeholder="kullanici_adi (@ olmadan)",
@@ -808,7 +796,7 @@ with gr.Blocks(title="🚀 X Scraper - Excel Destekli Versiyon", theme=gr.themes
             login_btn = gr.Button("🔐 X'e Giriş Yap", variant="primary", size="lg")
             login_output = gr.Textbox(label="Giriş Durumu", lines=4)
 
-            gr.Markdown("### 📊 4. Scraping Ayarları")
+            gr.Markdown("### 📊 3. Scraping Ayarları")
 
             with gr.Row():
                 tweet_count = gr.Number(
@@ -847,7 +835,7 @@ with gr.Blocks(title="🚀 X Scraper - Excel Destekli Versiyon", theme=gr.themes
 
             scrape_btn = gr.Button("🚀 Tweet Topla", variant="primary", size="lg")
 
-            gr.Markdown("### 💾 5. Kaydet & Kapat")
+            gr.Markdown("### 💾 4. Kaydet & Kapat")
             with gr.Row():
                 save_csv_btn = gr.Button("💾 CSV Hazırla", variant="secondary")
                 save_excel_btn = gr.Button("📊 Excel Hazırla", variant="secondary")
@@ -891,13 +879,6 @@ with gr.Blocks(title="🚀 X Scraper - Excel Destekli Versiyon", theme=gr.themes
     # Event handlers
     setup_btn.click(setup_browser, outputs=[setup_output])
 
-    # Excel yükleme
-    load_excel_btn.click(
-        load_excel_handler,
-        inputs=[excel_upload],
-        outputs=[scrape_output, tweet_table, stats]
-    )
-
     login_btn.click(login, inputs=[username, password], outputs=[login_output])
 
     scrape_btn.click(
@@ -933,12 +914,6 @@ with gr.Blocks(title="🚀 X Scraper - Excel Destekli Versiyon", theme=gr.themes
         gr.Markdown("""
         ### 🎯 Yeni Excel Özellikleri:
 
-        **📊 Excel Veri Yükleme:**
-        1. Daha önce kaydedilmiş Excel dosyasını yükleyin
-        2. Veriler otomatik olarak tabloya yüklenir
-        3. İstatistikler hesaplanır
-        4. CSV ve Excel olarak tekrar indirebilirsiniz
-
         **📈 Excel Export Özellikleri:**
         - **2 Sayfa:** Tweet verileri + İstatistikler
         - **Gelişmiş Formatting:** Renkli başlıklar, otomatik kolon genişliği
@@ -951,10 +926,9 @@ with gr.Blocks(title="🚀 X Scraper - Excel Destekli Versiyon", theme=gr.themes
 
         **🔄 Workflow Örnekleri:**
         1. **Tweet Toplama → Excel Export → Analiz**
-        2. **Eski Excel → Import → Yeni Verilerle Birleştir**
-        3. **Excel → Düzenleme → Tekrar Import**
+        2. **Excel → Düzenleme → Import (İsteğe bağlı)**
 
-        **📋 Gerekli Excel Kolonları (Import için):**
+        **📋 Excel Kolonları:**
         - `tweet`: Tweet metni
         - `yazar`: Yazar adı
         - `yazar_handle`: @username

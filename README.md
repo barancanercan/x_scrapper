@@ -236,13 +236,7 @@ python x2.py
 2. ChromeDriver automatically downloaded and installed
 3. Wait for **"✅ Chrome driver automatically installed!"** message
 
-#### **Step 3: Excel Data Loading (Optional)**
-1. **Upload Excel File**: Click **"📁 Excel Dosyası Yükle"**
-2. **Select File**: Choose .xlsx or .xls file
-3. **Load Data**: Click **"📊 Excel Verilerini Yükle"**
-4. **Verify**: Check data appears in table and statistics
-
-#### **Step 4: X Account Login**
+#### **Step 3: X Account Login**
 1. Enter **X Username** without @ symbol
    ```
    Example: username (❌ NOT @username)
@@ -251,7 +245,7 @@ python x2.py
 3. Click **"🔐 X'e Giriş Yap"** button
 4. Wait for login confirmation
 
-#### **Step 5: Configure Scraping**
+#### **Step 4: Configure Scraping**
 1. **Tweet Count**: Choose 5-200 tweets
 2. **Time Filter**: Set days (0=All, 7=Last week, 30=Last month)
 3. **Source Selection**: 
@@ -261,12 +255,12 @@ python x2.py
 4. **Profile Username** (Optional): Target specific user (e.g., `elonmusk`)
 5. **Hashtag Search** (Optional): Search by hashtag (e.g., `#python`)
 
-#### **Step 6: Collect Tweets**
+#### **Step 5: Collect Tweets**
 1. Click **"🚀 Tweet Topla"** button
 2. Process time: ~20 seconds for 20 tweets
 3. **Smart stopping**: Auto-stops when time range exceeded
 
-#### **Step 7: Export Data**
+#### **Step 6: Export Data**
 1. **CSV Export**: Click **"💾 CSV Hazırla"** for simple CSV
 2. **Excel Export**: Click **"📊 Excel Hazırla"** for professional Excel
 3. **Download**: Use download buttons that appear
@@ -813,7 +807,7 @@ SOFTWARE.
 
 **🚀 Happy Tweet Scraping with Excel Power! 📊**
 
-Made by Baran Can Ercan with ❤️ for the AI communityi
+Made by Baran Can Ercan with ❤️ for the AI community
 
 [⭐ Star this repo](.) • [🐛 Report issues](.) • [💡 Request features](.)
 
